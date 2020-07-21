@@ -2,7 +2,7 @@ import React from "react";
 import styled from "@emotion/styled";
 import { TOTAL_PEGS, getAllPegs } from "../models/CodePeg";
 import { PEG_DIAM } from "../config/config";
-import { getPegComponent } from "./Pegs";
+import { Peg } from "./Pegs";
 
 const PegsDisplaySection = styled.section`
   display: inline-grid;
@@ -18,7 +18,9 @@ const PegsDisplaySection = styled.section`
 const PegsDisplay = ({ ...otherProps }) => {
   return (
     <PegsDisplaySection {...otherProps}>
-      {getAllPegs().map((peg, i) => getPegComponent(peg, { key: i }))}
+      {getAllPegs().map((peg, i) => (
+        <Peg key={i} codePeg={peg} />
+      ))}
     </PegsDisplaySection>
   );
 };

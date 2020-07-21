@@ -1,21 +1,27 @@
 import React from "react";
-import { MAX_TURNS } from "../config/config";
 import { CodePeg } from "../models/CodePeg";
+import { Turn, initTurns } from "../models/Turn";
+import { useActionBufferType } from "../hooks/useActionBuffer";
 import { generateSecret } from "../game/secret";
-import { Turn, turnFactory } from "../models/Turn";
 
-interface GameContextProps {
+export interface GameContextProps {
   secret: CodePeg[];
   currentTurn: number;
   turns: Turn[];
+  actionBuffer: useActionBufferType;
 }
 
-export const defaultGameContext: GameContextProps = {
+export const defaultGameContext = {
   secret: generateSecret(),
   currentTurn: 0,
-  turns: Array(MAX_TURNS)
-    .fill(null)
-    .map((_, i): Turn => turnFactory(0, i)),
+  turns: initTurns(),
+  actionBuffer: {
+    position: null,
+    peg: null,
+    updatePosition: (newPosition: number) => {},
+    updatePeg: (newPeg: CodePeg) => {},
+    resetActionBuffer: () => {},
+  },
 };
 
 export const GameContext = React.createContext<GameContextProps>(

@@ -4,6 +4,7 @@ import SecretResult from "../SecretResult";
 import { generateSecret } from "../../game/secret";
 import { GameContext, defaultGameContext } from "../../context/gameContext";
 import { CodePeg } from "../../models/CodePeg";
+import { useGameControl } from "../../hooks/useGameControl";
 
 describe("SecretResult", () => {
   test("Display the secret result correctly", () => {

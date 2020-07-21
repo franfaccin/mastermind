@@ -2,7 +2,8 @@ import React from "react";
 import DecodingBoard from "../components/DecodingBoard";
 import PegsDisplay from "../components/PegsDisplay";
 import styled from "@emotion/styled";
-import { GameContext, defaultGameContext } from "../context/gameContext";
+import { GameContext } from "../context/gameContext";
+import { useGameControl } from "../hooks/useGameControl";
 
 const SpaceVertical = styled.div`
   width: 100%;
@@ -18,7 +19,7 @@ const GameArea = styled.div`
 
 const GameScreen = () => {
   return (
-    <GameContext.Provider value={defaultGameContext}>
+    <GameContext.Provider value={useGameControl()}>
       <GameArea>
         <h1>Game!</h1>
         <DecodingBoard />

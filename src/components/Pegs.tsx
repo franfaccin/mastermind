@@ -1,19 +1,21 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, MouseEvent } from "react";
 import styled from "@emotion/styled";
 import { css } from "@emotion/core";
 import { PEG_DIAM, FOCUS_COLOR } from "../config/config";
 import { CodePeg } from "../models/CodePeg";
+interface PegBaseProps extends React.ComponentProps<"div"> {
+  isActive?: boolean;
+  "data-testid"?: string;
+}
 
-const pegFocus = css`
+export const pegFocus = css`
   ::after {
     content: "";
 
     position: absolute;
-    top: 0;
-    bottom: 0;
-    left: -5px;
-    right: 0;
-    margin: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 
     box-sizing: content-box;
     width: ${PEG_DIAM + 4}px;
@@ -23,7 +25,7 @@ const pegFocus = css`
   }
 `;
 
-const PegBase = styled.div<{ isActive?: boolean }>`
+const pegBaseCss = ({ isActive = false }) => css`
   position: relative;
   width: ${PEG_DIAM}px;
   height: ${PEG_DIAM}px;
@@ -31,51 +33,59 @@ const PegBase = styled.div<{ isActive?: boolean }>`
   box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.25),
     inset 0px 0px 5px 1px rgba(0, 0, 0, 0.25);
 
-  ${({ isActive }) => isActive && pegFocus}
+  ${isActive && pegFocus}
 `;
 
-export const PegA = styled(PegBase)`
+export const PegA = styled.div<PegBaseProps>`
+  ${({ isActive }) => pegBaseCss({ isActive })}
   background-color: blue;
 `;
 
-export const PegB = styled(PegBase)`
+export const PegB = styled.div<PegBaseProps>`
+  ${({ isActive }) => pegBaseCss({ isActive })}
   background-color: red;
 `;
 
-export const PegC = styled(PegBase)`
+export const PegC = styled.div<PegBaseProps>`
+  ${({ isActive }) => pegBaseCss({ isActive })}
   background-color: green;
 `;
 
-export const PegD = styled(PegBase)`
+export const PegD = styled.div<PegBaseProps>`
+  ${({ isActive }) => pegBaseCss({ isActive })}
   background-color: yellow;
 `;
 
-export const PegE = styled(PegBase)`
+export const PegE = styled.div<PegBaseProps>`
+  ${({ isActive }) => pegBaseCss({ isActive })}
   background-color: pink;
 `;
 
-export const PegF = styled(PegBase)`
+export const PegF = styled.div<PegBaseProps>`
+  ${({ isActive }) => pegBaseCss({ isActive })}
   background-color: white;
 `;
 
-export function getPegComponent(
-  codePeg: CodePeg | null,
-  props: any
-): ReactElement | null {
+interface PegProps extends React.ComponentProps<"div"> {
+  codePeg?: CodePeg | null;
+  isActive?: boolean;
+}
+
+export const Peg = ({ codePeg, ...otherProps }: PegProps) => {
   switch (codePeg) {
     case CodePeg.A:
-      return <PegA {...props} data-testid="peg-a" />;
+      return <PegA {...otherProps} data-testid="peg-a" />;
     case CodePeg.B:
-      return <PegB {...props} data-testid="peg-b" />;
+      return <PegB {...otherProps} data-testid="peg-b" />;
     case CodePeg.C:
-      return <PegC {...props} data-testid="peg-c" />;
+      return <PegC {...otherProps} data-testid="peg-c" />;
     case CodePeg.D:
-      return <PegD {...props} data-testid="peg-d" />;
+      return <PegD {...otherProps} data-testid="peg-d" />;
     case CodePeg.E:
-      return <PegE {...props} data-testid="peg-e" />;
+      return <PegE {...otherProps} data-testid="peg-e" />;
     case CodePeg.F:
-      return <PegF {...props} data-testid="peg-f" />;
+      return <PegF {...otherProps} data-testid="peg-f" />;
     default:
       return null;
   }
-}
+};

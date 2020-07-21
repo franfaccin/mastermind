@@ -1,6 +1,6 @@
 import { guessScoreFactory, GuessScore } from "./GuessScore";
 import { CodePeg } from "./CodePeg";
-import { SECRET_SIZE } from "../config/config";
+import { SECRET_SIZE, MAX_TURNS } from "../config/config";
 
 export interface Turn {
   num: number;
@@ -19,3 +19,8 @@ export const turnFactory = (
   guessScore,
   isActive: num === activeTurn,
 });
+
+export const initTurns = () =>
+  Array(MAX_TURNS)
+    .fill(null)
+    .map((_, i): Turn => turnFactory(0, i));

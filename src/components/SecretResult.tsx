@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import styled from "@emotion/styled";
 import { COLUMN_SIZE, SECRET_SIZE, PEG_DIAM } from "../config/config";
 import { GameContext } from "../context/gameContext";
-import { getPegComponent } from "./Pegs";
+import { Peg } from "./Pegs";
 
 const BOARD_HEIGHT = SECRET_SIZE * (PEG_DIAM + PEG_DIAM / 2);
 
@@ -24,7 +24,9 @@ const SecretResult = () => {
   const { secret } = useContext(GameContext);
   return (
     <SecretResultSection>
-      {secret.map((peg, key) => getPegComponent(peg, { key }))}
+      {secret.map((peg, i) => (
+        <Peg key={i} codePeg={peg} />
+      ))}
     </SecretResultSection>
   );
 };
