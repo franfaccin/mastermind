@@ -1,5 +1,6 @@
 import { guessScoreFactory, GuessScore } from "./GuessScore";
 import { CodePeg } from "./CodePeg";
+import { SECRET_SIZE } from "../config/config";
 
 export interface Turn {
   num: number;
@@ -14,7 +15,7 @@ export const turnFactory = (
   guessScore = guessScoreFactory(0, 0, 4)
 ) => ({
   num,
-  guess: [],
+  guess: Array(SECRET_SIZE).fill(null),
   guessScore,
   isActive: num === activeTurn,
 });

@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "@emotion/styled";
 import GuessResult from "./GuessResult";
 import GuessBoard from "./GuessBoard";
-import { COLUMN_SIZE, MAX_TURNS } from "../config/config";
+import { COLUMN_SIZE } from "../config/config";
 import SecretResult from "./SecretResult";
+import { GameContext } from "../context/gameContext";
+import { Turn } from "../models/Turn";
 
 const GuessSection = styled.section`
   display: inline-grid;
@@ -21,23 +23,28 @@ const DecodingBoardArea = styled.div`
   align-items: center;
 `;
 
-const Guess = () => {
+interface GuessProps extends Turn {}
+
+const Guess = ({ guess, guessScore, isActive }: GuessProps) => {
   return (
     <GuessSection>
-      <GuessResult data-testid="guess-result" />
-      <GuessBoard data-testid="guess-board" />
+      <GuessResult result={guessScore} data-testid="guess-result" />
+      <GuessBoard
+        isActive={isActive}
+        guesses={guess}
+        data-testid="guess-board"
+      />
     </GuessSection>
   );
 };
 
 const DecodingBoard = () => {
+  const { turns } = useContext(GameContext);
   return (
     <DecodingBoardArea>
-      {Array(MAX_TURNS)
-        .fill(null)
-        .map((_, i) => (
-          <Guess key={i} />
-        ))}
+      {turns.map((turn) => (
+        <Guess {...turn} key={turn.num} />
+      ))}
       <SecretResult />
     </DecodingBoardArea>
   );
