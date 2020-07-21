@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "@emotion/styled";
-import { CodePeg, TOTAL_PEGS, getAllPegs } from "../models/CodePeg";
+import { TOTAL_PEGS, getAllPegs } from "../models/CodePeg";
 import { PEG_DIAM } from "../config/config";
 import { getPegComponent } from "./Pegs";
 

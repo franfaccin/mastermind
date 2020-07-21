@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import GuessResult from "./GuessResult";
 import GuessBoard from "./GuessBoard";
 import { COLUMN_SIZE, MAX_TRIES } from "../config/config";
+import SecretResult from "./SecretResult";
 
 const GuessSection = styled.section`
   display: inline-grid;
@@ -15,7 +16,10 @@ const GuessSection = styled.section`
   }
 `;
 
-const DecodingBoardArea = styled.div``;
+const DecodingBoardArea = styled.div`
+  display: flex;
+  align-items: center;
+`;
 
 const Guess = () => {
   return (
@@ -34,6 +38,7 @@ const DecodingBoard = () => {
         .map((_, i) => (
           <Guess key={i} />
         ))}
+      <SecretResult />
     </DecodingBoardArea>
   );
 };
