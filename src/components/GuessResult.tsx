@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "@emotion/styled";
 import { GuessScore, guessScoreFactory } from "../models/GuessScore";
-import { COLUMN_SIZE, SECRET_SIZE } from "../config/config";
+import { COLUMN_SIZE } from "../config/config";
 
 const SQUARE_SIZE = COLUMN_SIZE - 5;
 
