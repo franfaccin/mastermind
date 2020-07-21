@@ -1,6 +1,5 @@
 import { CodePeg } from "../models/CodePeg";
-
-export const SECRET_SIZE = 4;
+import { SECRET_SIZE } from "../config/config";
 
 export function generateSecret(): CodePeg[] {
   // Get size of code peg variations
