@@ -1,11 +1,11 @@
 import React from "react";
-import GuessResult from "../components/GuessResult";
+import DecodingBoard from "../components/DecodingBoard";
 
 const GameScreen = () => {
   return (
     <>
       <h1>Game!</h1>
-      <GuessResult />
+      <DecodingBoard />
     </>
   );
 };

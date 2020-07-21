@@ -48,10 +48,10 @@ const ScorePegBlow = styled(ScorePeg)`
   background-color: #fff;
 `;
 
-const GuessResult = ({ result }: GuessResultProps) => {
+const GuessResult = ({ result, ...otherProps }: GuessResultProps) => {
   const { hits, blows, miss } = result;
   return (
-    <GuessResultSquare>
+    <GuessResultSquare {...otherProps}>
       {Array(hits)
         .fill(null)
         .map((_, i) => (
@@ -72,7 +72,7 @@ const GuessResult = ({ result }: GuessResultProps) => {
 };
 
 GuessResult.defaultProps = {
-  result: guessScoreFactory(2, 2, 0),
+  result: guessScoreFactory(0, 0, 4),
 };
 
 export default GuessResult;
