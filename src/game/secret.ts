@@ -1,17 +1,14 @@
-import { CodePeg } from "../models/CodePeg";
+import { CodePeg, getAllPegs } from "../models/CodePeg";
 import { SECRET_SIZE } from "../config/config";
 
 export function generateSecret(): CodePeg[] {
   // Get size of code peg variations
-  const numOptions = Object.keys(CodePeg).length / 2;
-  const options: CodePeg[] = new Array(numOptions)
-    .fill("")
-    .map((_, i) => CodePeg[CodePeg[i] as keyof typeof CodePeg]);
+  const allPegs = getAllPegs();
 
   const secret = new Array(SECRET_SIZE).fill("").map((_) => {
-    const rng = Math.floor(options.length * Math.random());
-    const peg = options[rng];
-    options.splice(rng, 1);
+    const rng = Math.floor(allPegs.length * Math.random());
+    const peg = allPegs[rng];
+    allPegs.splice(rng, 1);
     return peg;
   });
   return secret;
