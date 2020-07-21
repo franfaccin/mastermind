@@ -2,14 +2,14 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import SecretResult from "../SecretResult";
 import { generateSecret } from "../../game/secret";
-import { GameContext } from "../../context/gameContext";
+import { GameContext, defaultGameContext } from "../../context/gameContext";
 import { CodePeg } from "../../models/CodePeg";
 
 describe("SecretResult", () => {
   test("Display the secret result correctly", () => {
     const secret = generateSecret();
     render(
-      <GameContext.Provider value={{ secret }}>
+      <GameContext.Provider value={{ ...defaultGameContext, secret }}>
         <SecretResult />
       </GameContext.Provider>
     );

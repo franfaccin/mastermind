@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import DecodingBoard from "../components/DecodingBoard";
 import PegsDisplay from "../components/PegsDisplay";
 import styled from "@emotion/styled";
-import { generateSecret } from "../game/secret";
-import { GameContext } from "../context/gameContext";
+import { GameContext, defaultGameContext } from "../context/gameContext";
 
 const SpaceVertical = styled.div`
   width: 100%;
@@ -18,9 +17,8 @@ const GameArea = styled.div`
 `;
 
 const GameScreen = () => {
-  const [secret] = useState(generateSecret());
   return (
-    <GameContext.Provider value={{ secret }}>
+    <GameContext.Provider value={defaultGameContext}>
       <GameArea>
         <h1>Game!</h1>
         <DecodingBoard />

@@ -2,7 +2,7 @@ import React from "react";
 import styled from "@emotion/styled";
 import GuessResult from "./GuessResult";
 import GuessBoard from "./GuessBoard";
-import { COLUMN_SIZE, MAX_TRIES } from "../config/config";
+import { COLUMN_SIZE, MAX_TURNS } from "../config/config";
 import SecretResult from "./SecretResult";
 
 const GuessSection = styled.section`
@@ -33,7 +33,7 @@ const Guess = () => {
 const DecodingBoard = () => {
   return (
     <DecodingBoardArea>
-      {Array(MAX_TRIES)
+      {Array(MAX_TURNS)
         .fill(null)
         .map((_, i) => (
           <Guess key={i} />
