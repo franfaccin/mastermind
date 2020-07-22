@@ -45,10 +45,11 @@ const GuessBoardArea = styled.div<{ isActive?: boolean }>`
 
 interface PegHoleProps {
   isActive?: boolean;
+  isActiveBoard?: boolean;
   onClick: () => void;
 }
 
-const PegHole = ({ isActive, onClick }: PegHoleProps) => (
+const PegHole = ({ isActive, isActiveBoard, onClick }: PegHoleProps) => (
   <div
     onClick={onClick}
     css={css`
@@ -67,7 +68,7 @@ const PegHole = ({ isActive, onClick }: PegHoleProps) => (
         vertical-align: center;
         width: ${PEG_HOLE_SIZE}px;
         height: ${PEG_HOLE_SIZE}px;
-        background-color: #000;
+        background-color: ${isActiveBoard ? "#000" : "#aaa"};
         border-radius: 50%;
       `}
     />
@@ -94,7 +95,11 @@ const GuessBoard = ({ guesses, isActive, ...otherProps }: GuessBoardProps) => {
         guess !== null ? (
           <Peg codePeg={guess} {...getPegProps(i)} />
         ) : (
-          <PegHole data-testid="guess-hole-peg" {...getPegProps(i)} />
+          <PegHole
+            data-testid="guess-hole-peg"
+            {...getPegProps(i)}
+            isActiveBoard={isActive}
+          />
         )
       )}
     </GuessBoardArea>

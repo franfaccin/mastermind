@@ -17,7 +17,20 @@ const pegBaseCss = ({ isActive = false }) => css`
   box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.25),
     inset 0px 0px 5px 1px rgba(0, 0, 0, 0.25);
 
+  animation: enter 0.25s 1 ease-out;
+
   ${isActive && PegFocus}
+
+  @keyframes enter {
+    0% {
+      transform: scale(0.75);
+      opacity: 0.5;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
 `;
 
 export const PegA = styled.div<PegBaseProps>`
