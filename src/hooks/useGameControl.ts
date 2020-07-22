@@ -21,10 +21,12 @@ export const useGameControl = (initialSecret?: CodePeg[]): GameContextProps => {
     [currentTurn]
   );
 
+  const actionBuffer = useActionBuffer(updateGuess);
+
   return {
     secret,
     turns,
     currentTurn,
-    actionBuffer: useActionBuffer(updateGuess),
+    actionBuffer,
   };
 };

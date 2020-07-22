@@ -13,12 +13,6 @@ export const useActionBuffer = (updateGuess: Function): useActionBufferType => {
   const [position, setPosition] = useState<number | null>(null);
   const [peg, setPeg] = useState<CodePeg | null>(null);
 
-  useEffect(() => {
-    if (position !== null && peg !== null) {
-      updateGuess(position, peg);
-    }
-  }, [position, peg, updateGuess]);
-
   const updatePeg = (newPeg: CodePeg) => {
     if (newPeg === peg) {
       setPeg(null);
@@ -36,9 +30,16 @@ export const useActionBuffer = (updateGuess: Function): useActionBufferType => {
   };
 
   const resetActionBuffer = () => {
-    setPosition(null);
+    setPeg(null);
     setPosition(null);
   };
+
+  useEffect(() => {
+    if (position !== null && peg !== null) {
+      updateGuess(position, peg);
+      resetActionBuffer();
+    }
+  }, [position, peg, updateGuess]);
 
   return {
     position,
