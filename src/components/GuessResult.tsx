@@ -1,15 +1,33 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "@emotion/styled";
 import { GuessScore, guessScoreFactory } from "../models/GuessScore";
 import { COLUMN_SIZE } from "../config/config";
+import { css } from "@emotion/core";
+import { GameContext } from "../context/gameContext";
 
 const SQUARE_SIZE = COLUMN_SIZE - 5;
 
 interface GuessResultProps {
+  isReady: boolean;
   result: GuessScore;
 }
 
+const GuessResultBase = css`
+  width: ${SQUARE_SIZE}px;
+  height: ${SQUARE_SIZE}px;
+  box-sizing: border-box;
+  border-radius: 10px;
+`;
+
+const ReadyButton = styled.button`
+  ${GuessResultBase}
+  background-color: green;
+  color: #fff;
+  cursor: pointer;
+`;
+
 const GuessResultSquare = styled.div`
+  ${GuessResultBase}
   width: ${SQUARE_SIZE}px;
   height: ${SQUARE_SIZE}px;
   box-sizing: border-box;
@@ -48,8 +66,14 @@ const ScorePegBlow = styled(ScorePeg)`
   background-color: #fff;
 `;
 
-const GuessResult = ({ result, ...otherProps }: GuessResultProps) => {
+const GuessResult = ({ result, isReady, ...otherProps }: GuessResultProps) => {
+  const { endTurn } = useContext(GameContext);
   const { hits, blows, miss } = result;
+
+  if (isReady) {
+    return <ReadyButton onClick={endTurn}>Go!</ReadyButton>;
+  }
+
   return (
     <GuessResultSquare {...otherProps}>
       {Array(hits)

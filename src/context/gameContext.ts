@@ -8,13 +8,16 @@ export interface GameContextProps {
   secret: CodePeg[];
   currentTurn: number;
   turns: Turn[];
+  isReady: boolean;
   actionBuffer: useActionBufferType;
+  endTurn: () => void;
 }
 
 export const defaultGameContext = {
   secret: generateSecret(),
   currentTurn: 0,
   turns: initTurns(),
+  isReady: false,
   actionBuffer: {
     position: null,
     peg: null,
@@ -22,6 +25,7 @@ export const defaultGameContext = {
     updatePeg: (newPeg: CodePeg) => {},
     resetActionBuffer: () => {},
   },
+  endTurn: () => {},
 };
 
 export const GameContext = React.createContext<GameContextProps>(

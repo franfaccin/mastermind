@@ -23,12 +23,18 @@ const DecodingBoardArea = styled.div`
   align-items: center;
 `;
 
-interface GuessProps extends Turn {}
+interface GuessProps extends Turn {
+  isReady: boolean;
+}
 
-const Guess = ({ guess, guessScore, isActive }: GuessProps) => {
+const Guess = ({ guess, guessScore, isActive, isReady }: GuessProps) => {
   return (
     <GuessSection>
-      <GuessResult result={guessScore} data-testid="guess-result" />
+      <GuessResult
+        result={guessScore}
+        isReady={isReady}
+        data-testid="guess-result"
+      />
       <GuessBoard
         isActive={isActive}
         guesses={guess}
@@ -39,11 +45,11 @@ const Guess = ({ guess, guessScore, isActive }: GuessProps) => {
 };
 
 const DecodingBoard = () => {
-  const { turns } = useContext(GameContext);
+  const { turns, isReady } = useContext(GameContext);
   return (
     <DecodingBoardArea>
       {turns.map((turn) => (
-        <Guess {...turn} key={turn.num} />
+        <Guess {...turn} key={turn.num} isReady={isReady && turn.isActive} />
       ))}
       <SecretResult />
     </DecodingBoardArea>

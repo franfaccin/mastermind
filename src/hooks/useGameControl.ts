@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { initTurns } from "../models/Turn";
 import { generateSecret } from "../game/secret";
 import { useActionBuffer } from "./useActionBuffer";
@@ -8,7 +8,12 @@ import { CodePeg } from "../models/CodePeg";
 export const useGameControl = (initialSecret?: CodePeg[]): GameContextProps => {
   const [turns, setTurns] = useState(initTurns());
   const [currentTurn, setCurrentTurn] = useState(0);
+  const [isReady, setIsReady] = useState(false);
   const [secret, setSecret] = useState(initialSecret || generateSecret());
+
+  useEffect(() => {
+    setIsReady(turns[currentTurn].guess.every((g) => g !== null));
+  }, [turns, currentTurn]);
 
   const updateGuess = useCallback(
     (position: number, peg: CodePeg) => {
@@ -21,12 +26,14 @@ export const useGameControl = (initialSecret?: CodePeg[]): GameContextProps => {
     [currentTurn]
   );
 
-  const actionBuffer = useActionBuffer(updateGuess);
+  const endTurn = () => {};
 
   return {
     secret,
     turns,
+    isReady,
     currentTurn,
-    actionBuffer,
+    actionBuffer: useActionBuffer(updateGuess),
+    endTurn,
   };
 };
