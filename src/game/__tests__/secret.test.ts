@@ -1,6 +1,6 @@
-import { generateSecret } from "./secret";
-import { CodePeg } from "../models/CodePeg";
-import { SECRET_SIZE } from "../config/config";
+import { generateSecret } from "../secret";
+import { CodePeg } from "../../models/CodePeg";
+import { SECRET_SIZE } from "../../config/config";
 
 const allDifferent = (secret: CodePeg[]): boolean => {
   return !secret.some((peg, i) =>
