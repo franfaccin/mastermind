@@ -53,7 +53,7 @@ const GuessBoard = ({ guesses, isActive, ...otherProps }: GuessBoardProps) => {
   } = useContext(GameContext);
 
   const handleClick = (newPosition: number) => () =>
-    updatePosition(newPosition);
+    isActive && updatePosition(newPosition);
 
   const getPegProps = (pos: number) => ({
     onClick: handleClick(pos),

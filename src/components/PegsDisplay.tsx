@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import styled from "@emotion/styled";
-import { TOTAL_PEGS, getAllPegs, CodePeg } from "../models/CodePeg";
+import { TOTAL_PEGS, getAllPegs } from "../models/CodePeg";
 import { PEG_DIAM } from "../config/config";
 import { Peg } from "./Pegs";
 import { GameContext } from "../context/gameContext";
