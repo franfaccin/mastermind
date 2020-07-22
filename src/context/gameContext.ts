@@ -3,12 +3,14 @@ import { CodePeg } from "../models/CodePeg";
 import { Turn, initTurns } from "../models/Turn";
 import { useActionBufferType } from "../hooks/useActionBuffer";
 import { generateSecret } from "../game/secret";
+import { GameStatus } from "../hooks/useGameControl";
 
 export interface GameContextProps {
   secret: CodePeg[];
   currentTurn: number;
   turns: Turn[];
   isReady: boolean;
+  gameStatus: GameStatus;
   actionBuffer: useActionBufferType;
   endTurn: () => void;
 }
@@ -18,6 +20,7 @@ export const defaultGameContext = {
   currentTurn: 0,
   turns: initTurns(),
   isReady: false,
+  gameStatus: GameStatus.IN_PROGRESS,
   actionBuffer: {
     position: null,
     peg: null,

@@ -3,7 +3,7 @@ import DecodingBoard from "../components/DecodingBoard";
 import PegsDisplay from "../components/PegsDisplay";
 import styled from "@emotion/styled";
 import { GameContext } from "../context/gameContext";
-import { useGameControl } from "../hooks/useGameControl";
+import { useGameControl, GameStatus } from "../hooks/useGameControl";
 
 const SpaceVertical = styled.div`
   width: 100%;
@@ -17,11 +17,24 @@ const GameArea = styled.div`
   align-items: center;
 `;
 
+const getStatusMessage = (status: GameStatus): string => {
+  switch (status) {
+    case GameStatus.WIN:
+      return "WINNER!";
+    case GameStatus.LOSE:
+      return "LOSER!";
+    default:
+      return "Game!";
+  }
+};
+
 const GameScreen = () => {
+  const gameContext = useGameControl();
+  const { gameStatus } = gameContext;
   return (
-    <GameContext.Provider value={useGameControl()}>
+    <GameContext.Provider value={gameContext}>
       <GameArea>
-        <h1>Game!</h1>
+        <h1>{getStatusMessage(gameStatus)}</h1>
         <DecodingBoard />
         <SpaceVertical />
         <PegsDisplay />
