@@ -1,10 +1,18 @@
-import React, { useContext } from "react";
+/** @jsx jsx */
+import { css, jsx } from "@emotion/core";
+
+import { useContext } from "react";
 import styled from "@emotion/styled";
-import { SECRET_SIZE, COLUMN_SIZE, PEG_DIAM } from "../config/config";
-import { Peg, pegFocus } from "./Pegs";
+import {
+  SECRET_SIZE,
+  COLUMN_SIZE,
+  PEG_DIAM,
+  FOCUS_COLOR,
+} from "../config/config";
 import { CodePeg } from "../models/CodePeg";
-import { css } from "@emotion/core";
 import { GameContext } from "../context/gameContext";
+import { Peg } from "./Pegs";
+import { PegFocus } from "../styles/PegFocus";
 
 interface GuessBoardProps {
   guesses: Array<CodePeg | null>;
@@ -12,10 +20,10 @@ interface GuessBoardProps {
 }
 
 const BOARD_HEIGHT = SECRET_SIZE * (PEG_DIAM + PEG_DIAM / 2);
-const PEG_HOLE_SIZE = PEG_DIAM * 0.75;
+const PEG_HOLE_SIZE = PEG_DIAM * 0.25;
 
 const BoardActive = css`
-  border: 5px solid #1d64cd;
+  border: 2px solid ${FOCUS_COLOR};
   & > * {
     cursor: pointer;
   }
@@ -24,9 +32,7 @@ const BoardActive = css`
 const GuessBoardArea = styled.div<{ isActive?: boolean }>`
   width: ${COLUMN_SIZE}px;
   height: ${BOARD_HEIGHT}px;
-  background-color: #ccc;
-  border-radius: 15px;
-  box-shadow: inset 0px 0px 8px 1px rgba(112, 112, 112, 0.75);
+  border-radius: ${COLUMN_SIZE / 2}px;
 
   display: grid;
   grid-template-columns: 100%;
@@ -37,15 +43,36 @@ const GuessBoardArea = styled.div<{ isActive?: boolean }>`
   ${({ isActive }) => isActive && BoardActive}
 `;
 
-const PegHole = styled.div<{ isActive?: boolean }>`
-  position: relative;
-  width: ${PEG_HOLE_SIZE}px;
-  height: ${PEG_HOLE_SIZE}px;
-  background-color: #000;
-  border-radius: 50%;
+interface PegHoleProps {
+  isActive?: boolean;
+  onClick: () => void;
+}
 
-  ${({ isActive }) => isActive && pegFocus}
-`;
+const PegHole = ({ isActive, onClick }: PegHoleProps) => (
+  <div
+    onClick={onClick}
+    css={css`
+      position: relative;
+      width: ${PEG_DIAM}px;
+      height: ${PEG_DIAM}px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      ${isActive && PegFocus}
+    `}
+  >
+    <div
+      css={css`
+        vertical-align: center;
+        width: ${PEG_HOLE_SIZE}px;
+        height: ${PEG_HOLE_SIZE}px;
+        background-color: #000;
+        border-radius: 50%;
+      `}
+    />
+  </div>
+);
 
 const GuessBoard = ({ guesses, isActive, ...otherProps }: GuessBoardProps) => {
   const {

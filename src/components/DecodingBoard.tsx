@@ -7,9 +7,12 @@ import SecretResult from "./SecretResult";
 import { GameContext } from "../context/gameContext";
 import { Turn } from "../models/Turn";
 
+const GuessWrapper = styled.div`
+  display: flex;
+`;
+
 const GuessSection = styled.section`
   display: inline-grid;
-  margin-right: 10px;
   width: ${COLUMN_SIZE}px;
   justify-items: center;
   align-items: center;
@@ -23,24 +26,34 @@ const DecodingBoardArea = styled.div`
   align-items: center;
 `;
 
+const Divider = styled.div`
+  width: 4px;
+  border-radius: 2px;
+  border: 1px solid #ccc;
+  margin: 5px;
+`;
+
 interface GuessProps extends Turn {
   isReady: boolean;
 }
 
 const Guess = ({ guess, guessScore, isActive, isReady }: GuessProps) => {
   return (
-    <GuessSection>
-      <GuessResult
-        result={guessScore}
-        isReady={isReady}
-        data-testid="guess-result"
-      />
-      <GuessBoard
-        isActive={isActive}
-        guesses={guess}
-        data-testid="guess-board"
-      />
-    </GuessSection>
+    <GuessWrapper>
+      <GuessSection>
+        <GuessResult
+          result={guessScore}
+          isReady={isReady}
+          data-testid="guess-result"
+        />
+        <GuessBoard
+          isActive={isActive}
+          guesses={guess}
+          data-testid="guess-board"
+        />
+      </GuessSection>
+      <Divider />
+    </GuessWrapper>
   );
 };
 

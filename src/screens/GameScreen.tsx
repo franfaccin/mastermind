@@ -1,14 +1,8 @@
 import React from "react";
-import DecodingBoard from "../components/DecodingBoard";
-import PegsDisplay from "../components/PegsDisplay";
 import styled from "@emotion/styled";
 import { GameContext } from "../context/gameContext";
 import { useGameControl, GameStatus } from "../hooks/useGameControl";
-
-const SpaceVertical = styled.div`
-  width: 100%;
-  height: 10px;
-`;
+import GameBoard from "../components/GameBoard";
 
 const GameArea = styled.div`
   display: flex;
@@ -35,9 +29,7 @@ const GameScreen = () => {
     <GameContext.Provider value={gameContext}>
       <GameArea>
         <h1>{getStatusMessage(gameStatus)}</h1>
-        <DecodingBoard />
-        <SpaceVertical />
-        <PegsDisplay />
+        <GameBoard />
       </GameArea>
     </GameContext.Provider>
   );

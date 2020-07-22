@@ -1,29 +1,13 @@
 import React from "react";
 import styled from "@emotion/styled";
 import { css } from "@emotion/core";
-import { PEG_DIAM, FOCUS_COLOR } from "../config/config";
+import { PEG_DIAM } from "../config/config";
 import { CodePeg } from "../models/CodePeg";
+import { PegFocus } from "../styles/PegFocus";
 interface PegBaseProps extends React.ComponentProps<"div"> {
   isActive?: boolean;
   "data-testid"?: string;
 }
-
-export const pegFocus = css`
-  ::after {
-    content: "";
-
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-
-    box-sizing: content-box;
-    width: ${PEG_DIAM + 4}px;
-    height: ${PEG_DIAM + 4}px;
-    border: 3px solid ${FOCUS_COLOR};
-    border-radius: 50%;
-  }
-`;
 
 const pegBaseCss = ({ isActive = false }) => css`
   position: relative;
@@ -33,7 +17,7 @@ const pegBaseCss = ({ isActive = false }) => css`
   box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.25),
     inset 0px 0px 5px 1px rgba(0, 0, 0, 0.25);
 
-  ${isActive && pegFocus}
+  ${isActive && PegFocus}
 `;
 
 export const PegA = styled.div<PegBaseProps>`
