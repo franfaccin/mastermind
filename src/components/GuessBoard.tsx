@@ -46,12 +46,10 @@ const GuessBoardArea = styled.div<{ isActive?: boolean }>`
 interface PegHoleProps {
   isActive?: boolean;
   isActiveBoard?: boolean;
-  onClick: () => void;
 }
 
-const PegHole = ({ isActive, isActiveBoard, onClick }: PegHoleProps) => (
+const PegHole = ({ isActive, isActiveBoard, ...otherProps }: PegHoleProps) => (
   <div
-    onClick={onClick}
     css={css`
       position: relative;
       width: ${PEG_DIAM}px;
@@ -62,6 +60,7 @@ const PegHole = ({ isActive, isActiveBoard, onClick }: PegHoleProps) => (
       align-items: center;
       ${isActive && PegFocus}
     `}
+    {...otherProps}
   >
     <div
       css={css`
