@@ -7,6 +7,7 @@ import { Button } from "../styles/Button";
 import { SpaceVertical } from "../styles/SpaceVertical";
 import { SpaceHorizontal } from "../styles/SpaceHorizontal";
 import GameRules from "../components/GameRules";
+import Scoreboard from "../components/Scoreboard";
 import { Modal } from "../components/Modal";
 
 const GameArea = styled.div`
@@ -14,6 +15,12 @@ const GameArea = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+`;
+
+const BottomSection = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
 `;
 
 const getStatusMessage = (status: GameStatus): string => {
@@ -37,11 +44,13 @@ const GameScreen = () => {
         <h1>{getStatusMessage(gameStatus)}</h1>
         <GameBoard />
         <SpaceVertical scale={2} />
-        <div>
+        <BottomSection>
           <Button onClick={startNewGame}>Start New Game</Button>
           <SpaceHorizontal />
           <Button onClick={() => setModalOpen(true)}>Rules</Button>
-        </div>
+          <SpaceHorizontal scale={2} />
+          <Scoreboard wins={0} loses={0} />
+        </BottomSection>
       </GameArea>
       <Modal
         isOpen={isModalOpen}
