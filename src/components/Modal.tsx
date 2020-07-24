@@ -1,13 +1,16 @@
-import React from "react";
+/** @jsx jsx */
+import { css, jsx, ClassNames } from "@emotion/core";
 import ReactModal from "react-modal";
-import { css, ClassNames } from "@emotion/core";
 import { REGULAR_SPACE } from "../config/config";
+import { breakpoint_md } from "../styles/MediaQueries";
+import { Button } from "../styles/Button";
+import CrossSVG from "../icons/cross";
 
 const modalStyle = css`
   background-color: #fff;
   position: absolute;
   width: 70vw;
-  max-height: 100vh;
+  max-height: 85vh;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -16,6 +19,15 @@ const modalStyle = css`
   padding: ${2 * REGULAR_SPACE}px;
   outline: none;
   overflow: auto;
+
+  ${breakpoint_md} {
+    width: 95vw;
+    margin: ${REGULAR_SPACE}px auto;
+    top: auto;
+    left: auto;
+    transform: none;
+    position: relative;
+  }
 `;
 
 const overlayStyle = css`
@@ -34,9 +46,17 @@ const overlayStyle = css`
 interface ModalProps extends ReactModal.Props {
   isOpen: boolean;
   children: Element | React.ReactNode;
+  showCloseBtn?: boolean;
+  onRequestClose?: (event: React.MouseEvent | React.KeyboardEvent) => void;
 }
 
-export const Modal = ({ isOpen, children, ...otherProps }: ModalProps) => {
+export const Modal = ({
+  isOpen,
+  showCloseBtn,
+  onRequestClose,
+  children,
+  ...otherProps
+}: ModalProps) => {
   return (
     <ClassNames>
       {({ css }) => (
@@ -44,11 +64,31 @@ export const Modal = ({ isOpen, children, ...otherProps }: ModalProps) => {
           isOpen={isOpen}
           className={css(modalStyle)}
           overlayClassName={css(overlayStyle)}
+          onRequestClose={onRequestClose}
           {...otherProps}
         >
+          {showCloseBtn && (
+            <Button
+              onClick={onRequestClose}
+              css={css`
+                float: right;
+                & > svg {
+                  vertical-align: middle;
+                  height: 16px;
+                  width: 16px;
+                }
+              `}
+            >
+              <CrossSVG />
+            </Button>
+          )}
           {children}
         </ReactModal>
       )}
     </ClassNames>
   );
+};
+
+Modal.defaultProps = {
+  onRequestClose: () => {},
 };

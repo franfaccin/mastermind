@@ -21,7 +21,7 @@ const GameArea = styled.div`
 const BottomSection = styled.div`
   display: flex;
   justify-content: center;
-  align-items: baseline;
+  align-items: center;
 `;
 
 const getStatusMessage = (status: GameStatus): string => {
@@ -68,6 +68,7 @@ const GameScreen = () => {
       </GameArea>
       <Modal
         isOpen={isModalOpen}
+        showCloseBtn={true}
         onRequestClose={() => setModalOpen(false)}
         contentLabel="Game Rules"
       >

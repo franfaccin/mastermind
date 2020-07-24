@@ -13,6 +13,7 @@ import { CodePeg } from "../models/CodePeg";
 import { GameContext } from "../context/gameContext";
 import { Peg } from "./Pegs";
 import { PegFocus } from "../styles/PegFocus";
+import { breakpoint_md } from "../styles/MediaQueries";
 
 interface GuessBoardProps {
   guesses: Array<CodePeg | null>;
@@ -41,6 +42,13 @@ const GuessBoardArea = styled.div<{ isActive?: boolean }>`
   align-items: center;
 
   ${({ isActive }) => isActive && BoardActive}
+
+  ${breakpoint_md} {
+    width: ${BOARD_HEIGHT}px;
+    height: ${COLUMN_SIZE}px;
+    grid-template-rows: 100%;
+    grid-template-columns: repeat(${SECRET_SIZE}, ${100 / SECRET_SIZE}%);
+  }
 `;
 
 interface PegHoleProps {

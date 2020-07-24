@@ -13,6 +13,7 @@ import { GameContext } from "../context/gameContext";
 import { GameStatus } from "../hooks/useGameControl";
 import { SpaceVertical } from "../styles/SpaceVertical";
 import { Peg } from "./Pegs";
+import { breakpoint_md } from "../styles/MediaQueries";
 
 const BOARD_HEIGHT = SECRET_SIZE * (PEG_DIAM + PEG_DIAM / 2);
 const COLOR_WIN = "#009688";
@@ -22,6 +23,11 @@ const SecretResultBase = css`
   width: ${COLUMN_SIZE}px;
   height: ${BOARD_HEIGHT}px;
   border-radius: ${COLUMN_SIZE / 2}px;
+
+  ${breakpoint_md} {
+    width: ${BOARD_HEIGHT}px;
+    height: ${COLUMN_SIZE}px;
+  }
 `;
 
 const secretCover = (hideSecret: boolean) => css`
@@ -69,6 +75,11 @@ const SecretResultSection = styled.section<{
   ${({ hideSecret }) => secretCover(hideSecret)}
   ${({ hideSecret, isWin }) =>
     !hideSecret && (isWin ? winnerStyle : loserStyle)}
+
+  ${breakpoint_md} {
+    grid-template-columns: repeat(${SECRET_SIZE}, ${100 / SECRET_SIZE}%);
+    grid-template-rows: 100%;
+  }
 `;
 
 const SecretResult = () => {
@@ -80,6 +91,9 @@ const SecretResult = () => {
       <SpaceVertical
         css={css`
           height: ${GUESS_SCORE_SIZE + REGULAR_SPACE}px;
+          ${breakpoint_md} {
+            height: ${REGULAR_SPACE}px;
+          }
         `}
       />
       <SecretResultSection hideSecret={!finishedGame} isWin={isWin}>
