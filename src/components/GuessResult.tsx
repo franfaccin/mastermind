@@ -25,9 +25,21 @@ const ReadyButton = styled.button`
   color: #fff;
   border: 0;
   cursor: pointer;
+  animation: enter 0.25s 1 ease-out;
 
   :active {
     background-color: #357a38;
+  }
+
+  @keyframes enter {
+    0% {
+      transform: scale(0.75);
+      opacity: 0.5;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
   }
 `;
 
