@@ -53,6 +53,14 @@ export const useGameControl = (initialSecret?: CodePeg[]): GameContextProps => {
     });
   };
 
+  const startNewGame = () => {
+    setSecret(generateSecret());
+    setGameStatus(GameStatus.IN_PROGRESS);
+    setTurns(initTurns());
+    setIsReady(false);
+    setCurrentTurn(0);
+  };
+
   return {
     secret,
     turns,
@@ -61,5 +69,6 @@ export const useGameControl = (initialSecret?: CodePeg[]): GameContextProps => {
     gameStatus,
     actionBuffer: useActionBuffer(updateGuess),
     endTurn,
+    startNewGame,
   };
 };

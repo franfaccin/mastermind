@@ -3,6 +3,8 @@ import styled from "@emotion/styled";
 import { GameContext } from "../context/gameContext";
 import { useGameControl, GameStatus } from "../hooks/useGameControl";
 import GameBoard from "../components/GameBoard";
+import { Button } from "../styles/Button";
+import { SpaceVertical } from "../styles/SpaceVertical";
 
 const GameArea = styled.div`
   display: flex;
@@ -24,12 +26,14 @@ const getStatusMessage = (status: GameStatus): string => {
 
 const GameScreen = () => {
   const gameContext = useGameControl();
-  const { gameStatus } = gameContext;
+  const { gameStatus, startNewGame } = gameContext;
   return (
     <GameContext.Provider value={gameContext}>
       <GameArea>
         <h1>{getStatusMessage(gameStatus)}</h1>
         <GameBoard />
+        <SpaceVertical scale={2} />
+        <Button onClick={startNewGame}>Start New Game</Button>
       </GameArea>
     </GameContext.Provider>
   );

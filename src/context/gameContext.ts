@@ -13,6 +13,7 @@ export interface GameContextProps {
   gameStatus: GameStatus;
   actionBuffer: useActionBufferType;
   endTurn: () => void;
+  startNewGame: () => void;
 }
 
 export const defaultGameContext = {
@@ -29,6 +30,7 @@ export const defaultGameContext = {
     resetActionBuffer: () => {},
   },
   endTurn: () => {},
+  startNewGame: () => {},
 };
 
 export const GameContext = React.createContext<GameContextProps>(
