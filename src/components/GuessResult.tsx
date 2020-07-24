@@ -1,12 +1,11 @@
 import React, { useContext } from "react";
 import styled from "@emotion/styled";
 import { GuessScore, guessScoreFactory } from "../models/GuessScore";
-import { COLUMN_SIZE } from "../config/config";
+import { COLUMN_SIZE, GUESS_SCORE_SIZE } from "../config/config";
 import { css } from "@emotion/core";
 import { GameContext } from "../context/gameContext";
 
-const SQUARE_SIZE = COLUMN_SIZE - 5;
-const SCORE_PEG_SIZE = SQUARE_SIZE * 0.2;
+const SCORE_PEG_SIZE = GUESS_SCORE_SIZE * 0.2;
 
 interface GuessResultProps {
   isReady: boolean;
@@ -14,8 +13,8 @@ interface GuessResultProps {
 }
 
 const GuessResultBase = css`
-  width: ${SQUARE_SIZE}px;
-  height: ${SQUARE_SIZE}px;
+  width: ${GUESS_SCORE_SIZE}px;
+  height: ${GUESS_SCORE_SIZE}px;
   box-sizing: border-box;
   border-radius: 10px;
 `;
@@ -34,7 +33,7 @@ const ReadyButton = styled.button`
 
 const GuessResultSquare = styled.div`
   ${GuessResultBase}
-  padding: ${SQUARE_SIZE / 5}px;
+  padding: ${GUESS_SCORE_SIZE / 5}px;
 
   display: grid;
   grid-template-columns: 50% 50%;
