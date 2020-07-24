@@ -1,7 +1,7 @@
-import React, { useContext } from "react";
-import styled from "@emotion/styled";
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core";
+import { useContext } from "react";
+import styled from "@emotion/styled";
 import {
   COLUMN_SIZE,
   SECRET_SIZE,

@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import styled from "@emotion/styled";
 import { GuessScore, guessScoreFactory } from "../models/GuessScore";
-import { COLUMN_SIZE, GUESS_SCORE_SIZE } from "../config/config";
+import { GUESS_SCORE_SIZE } from "../config/config";
 import { css } from "@emotion/core";
 import { GameContext } from "../context/gameContext";
 
