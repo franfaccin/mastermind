@@ -1,14 +1,21 @@
 import React from "react";
 import styled from "@emotion/styled";
+import { REGULAR_SPACE } from "../config/config";
 
 const Title = styled.span`
   display: inline-block;
   min-width: 50px;
+  text-align: right;
 `;
 
 const Result = styled.span`
   display: inline-block;
-  min-width: 30px;
+  min-width: 15px;
+  text-align: right;
+`;
+
+const ScoreSection = styled.p`
+  margin-right: ${REGULAR_SPACE}px;
 `;
 
 interface ScoreboardProps {
@@ -19,12 +26,12 @@ interface ScoreboardProps {
 const Scoreboard = ({ wins, loses }: ScoreboardProps) => {
   return (
     <>
-      <p>
+      <ScoreSection>
         <Title>Wins:</Title> <Result>{wins}</Result>
-      </p>
-      <p>
+      </ScoreSection>
+      <ScoreSection>
         <Title>Loses:</Title> <Result>{loses}</Result>
-      </p>
+      </ScoreSection>
     </>
   );
 };

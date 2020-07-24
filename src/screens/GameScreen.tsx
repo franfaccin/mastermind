@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "@emotion/styled";
 import { GameContext } from "../context/gameContext";
 import { useGameControl, GameStatus } from "../hooks/useGameControl";
@@ -9,6 +9,7 @@ import { SpaceHorizontal } from "../styles/SpaceHorizontal";
 import GameRules from "../components/GameRules";
 import Scoreboard from "../components/Scoreboard";
 import { Modal } from "../components/Modal";
+import { useScoreboard } from "../hooks/useScoreboard";
 
 const GameArea = styled.div`
   display: flex;
@@ -35,13 +36,26 @@ const getStatusMessage = (status: GameStatus): string => {
 };
 
 const GameScreen = () => {
-  const gameContext = useGameControl();
   const [isModalOpen, setModalOpen] = useState(false);
+  const { wins, loses, addWin, addLose } = useScoreboard();
+  const gameContext = useGameControl();
   const { gameStatus, startNewGame } = gameContext;
+  const [message, setMessage] = useState(getStatusMessage(gameStatus));
+
+  useEffect(() => {
+    if (gameStatus === GameStatus.WIN) {
+      addWin();
+    } else if (gameStatus === GameStatus.LOSE) {
+      addLose();
+    }
+    setMessage(getStatusMessage(gameStatus));
+    // eslint-disable-next-line
+  }, [gameStatus]);
+
   return (
     <GameContext.Provider value={gameContext}>
       <GameArea>
-        <h1>{getStatusMessage(gameStatus)}</h1>
+        <h1>{message}</h1>
         <GameBoard />
         <SpaceVertical scale={2} />
         <BottomSection>
@@ -49,7 +63,7 @@ const GameScreen = () => {
           <SpaceHorizontal />
           <Button onClick={() => setModalOpen(true)}>Rules</Button>
           <SpaceHorizontal scale={2} />
-          <Scoreboard wins={0} loses={0} />
+          <Scoreboard wins={wins} loses={loses} />
         </BottomSection>
       </GameArea>
       <Modal

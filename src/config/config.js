@@ -7,3 +7,5 @@ export const SECRET_SIZE = 4;
 export const MAX_TURNS = 8;
 
 export const FOCUS_COLOR = "#3a79c5";
+
+export const LOCALSTORAGE_SCOREBOARD_KEY = "mastermindScoreboard";
