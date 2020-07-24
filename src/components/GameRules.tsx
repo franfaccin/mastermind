@@ -43,8 +43,8 @@ const GameRules = () => {
         <RuleLi>
           <ScorePegHit />
           <span>
-            For each color that is right AND in the right position of your
-            guess, a small orange dot is placed on top of your guess.
+            For each color that is right AND in the right position, a small
+            orange dot is placed on top of your guess.
           </span>
         </RuleLi>
         <RuleLi>
@@ -53,6 +53,10 @@ const GameRules = () => {
             For each color that is right BUT NOT in the right position, a white
             dot is placed on top of your guess.
           </span>
+        </RuleLi>
+        <RuleLi>
+          Note: The dots do not match the positions of your guess, they're just
+          an indication.
         </RuleLi>
       </ul>
       <p>
