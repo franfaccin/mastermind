@@ -19,11 +19,11 @@ const GameArea = styled.div`
 const getStatusMessage = (status: GameStatus): string => {
   switch (status) {
     case GameStatus.WIN:
-      return "WINNER!";
+      return "You Win! 🎉";
     case GameStatus.LOSE:
-      return "LOSER!";
+      return "You Lost! 👎";
     default:
-      return "Game!";
+      return "Mastermind";
   }
 };
 
