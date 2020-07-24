@@ -7,7 +7,7 @@ import {
   SECRET_SIZE,
   PEG_DIAM,
   GUESS_SCORE_SIZE,
-  VERTICAL_SPACE,
+  REGULAR_SPACE,
 } from "../config/config";
 import { GameContext } from "../context/gameContext";
 import { GameStatus } from "../hooks/useGameControl";
@@ -30,7 +30,6 @@ const secretCover = (hideSecret: boolean) => css`
     content: "";
     position: absolute;
     background-color: #666;
-    z-index: 1;
     ${!hideSecret &&
     css`
       animation: hide 0.5s 1 ease-out forwards;
@@ -80,7 +79,7 @@ const SecretResult = () => {
     <div>
       <SpaceVertical
         css={css`
-          height: ${GUESS_SCORE_SIZE + VERTICAL_SPACE}px;
+          height: ${GUESS_SCORE_SIZE + REGULAR_SPACE}px;
         `}
       />
       <SecretResultSection hideSecret={!finishedGame} isWin={isWin}>

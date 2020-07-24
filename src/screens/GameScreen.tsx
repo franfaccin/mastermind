@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "@emotion/styled";
 import { GameContext } from "../context/gameContext";
 import { useGameControl, GameStatus } from "../hooks/useGameControl";
 import GameBoard from "../components/GameBoard";
 import { Button } from "../styles/Button";
 import { SpaceVertical } from "../styles/SpaceVertical";
+import { SpaceHorizontal } from "../styles/SpaceHorizontal";
+import GameRules from "../components/GameRules";
+import { Modal } from "../components/Modal";
 
 const GameArea = styled.div`
   display: flex;
@@ -26,6 +29,7 @@ const getStatusMessage = (status: GameStatus): string => {
 
 const GameScreen = () => {
   const gameContext = useGameControl();
+  const [isModalOpen, setModalOpen] = useState(false);
   const { gameStatus, startNewGame } = gameContext;
   return (
     <GameContext.Provider value={gameContext}>
@@ -33,8 +37,19 @@ const GameScreen = () => {
         <h1>{getStatusMessage(gameStatus)}</h1>
         <GameBoard />
         <SpaceVertical scale={2} />
-        <Button onClick={startNewGame}>Start New Game</Button>
+        <div>
+          <Button onClick={startNewGame}>Start New Game</Button>
+          <SpaceHorizontal />
+          <Button onClick={() => setModalOpen(true)}>Rules</Button>
+        </div>
       </GameArea>
+      <Modal
+        isOpen={isModalOpen}
+        onRequestClose={() => setModalOpen(false)}
+        contentLabel="Game Rules"
+      >
+        <GameRules />
+      </Modal>
     </GameContext.Provider>
   );
 };

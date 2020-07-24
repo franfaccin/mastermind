@@ -51,6 +51,8 @@ const ScorePegHole = styled.div`
 
 const ScorePeg = styled.div`
   box-sizing: border-box;
+  min-width: ${SCORE_PEG_SIZE}px;
+  min-height: ${SCORE_PEG_SIZE}px;
   width: ${SCORE_PEG_SIZE}px;
   height: ${SCORE_PEG_SIZE}px;
   border-radius: 50%;
@@ -71,11 +73,11 @@ const ScorePeg = styled.div`
   }
 `;
 
-const ScorePegHit = styled(ScorePeg)`
+export const ScorePegHit = styled(ScorePeg)`
   background-color: #ff8747;
 `;
 
-const ScorePegBlow = styled(ScorePeg)`
+export const ScorePegBlow = styled(ScorePeg)`
   background-color: #fff;
 `;
 
