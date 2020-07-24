@@ -1,12 +1,8 @@
 import React from "react";
+import styled from "@emotion/styled";
+import { SpaceVertical } from "../styles/SpaceVertical";
 import DecodingBoard from "./DecodingBoard";
 import PegsDisplay from "./PegsDisplay";
-import styled from "@emotion/styled";
-
-const SpaceVertical = styled.div`
-  width: 100%;
-  height: 10px;
-`;
 
 const GameBoardDiv = styled.div`
   display: flex;

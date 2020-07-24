@@ -4,6 +4,7 @@ import GuessResult from "./GuessResult";
 import GuessBoard from "./GuessBoard";
 import { COLUMN_SIZE } from "../config/config";
 import SecretResult from "./SecretResult";
+import { SpaceVertical } from "../styles/SpaceVertical";
 import { GameContext } from "../context/gameContext";
 import { Turn } from "../models/Turn";
 
@@ -16,9 +17,6 @@ const GuessSection = styled.section`
   width: ${COLUMN_SIZE}px;
   justify-items: center;
   align-items: center;
-  & > :first-of-type {
-    margin-bottom: 10px;
-  }
 `;
 
 const DecodingBoardArea = styled.div`
@@ -46,6 +44,7 @@ const Guess = ({ guess, guessScore, isActive, isReady }: GuessProps) => {
           isReady={isReady}
           data-testid="guess-result"
         />
+        <SpaceVertical />
         <GuessBoard
           isActive={isActive}
           guesses={guess}

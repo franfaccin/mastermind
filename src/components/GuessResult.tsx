@@ -22,9 +22,14 @@ const GuessResultBase = css`
 
 const ReadyButton = styled.button`
   ${GuessResultBase}
-  background-color: green;
+  background-color: #00a152;
   color: #fff;
+  border: 0;
   cursor: pointer;
+
+  :active {
+    background-color: #357a38;
+  }
 `;
 
 const GuessResultSquare = styled.div`
