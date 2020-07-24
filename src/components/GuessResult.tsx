@@ -6,6 +6,7 @@ import { css } from "@emotion/core";
 import { GameContext } from "../context/gameContext";
 
 const SQUARE_SIZE = COLUMN_SIZE - 5;
+const SCORE_PEG_SIZE = SQUARE_SIZE * 0.2;
 
 interface GuessResultProps {
   isReady: boolean;
@@ -28,12 +29,7 @@ const ReadyButton = styled.button`
 
 const GuessResultSquare = styled.div`
   ${GuessResultBase}
-  width: ${SQUARE_SIZE}px;
-  height: ${SQUARE_SIZE}px;
-  box-sizing: border-box;
-  border-radius: 10px;
-  background-color: #ccc;
-  box-shadow: inset 0px 0px 8px 1px rgba(112, 112, 112, 0.75);
+  padding: ${SQUARE_SIZE / 5}px;
 
   display: grid;
   grid-template-columns: 50% 50%;
@@ -43,23 +39,36 @@ const GuessResultSquare = styled.div`
 `;
 
 const ScorePegHole = styled.div`
-  width: 10px;
-  height: 10px;
+  width: ${Math.ceil(SCORE_PEG_SIZE * 0.5)}px;
+  height: ${Math.ceil(SCORE_PEG_SIZE * 0.5)}px;
   border-radius: 50%;
   background-color: #000;
 `;
 
 const ScorePeg = styled.div`
   box-sizing: border-box;
-  width: 16px;
-  height: 16px;
+  width: ${SCORE_PEG_SIZE}px;
+  height: ${SCORE_PEG_SIZE}px;
   border-radius: 50%;
-  box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.25),
+  box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.25),
     inset 0px 0px 5px 1px rgba(0, 0, 0, 0.25);
+
+  animation: enter 0.25s 1 ease-out;
+
+  @keyframes enter {
+    0% {
+      transform: scale(0.75);
+      opacity: 0.5;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
 `;
 
 const ScorePegHit = styled(ScorePeg)`
-  background-color: #c75e26;
+  background-color: #ff8747;
 `;
 
 const ScorePegBlow = styled(ScorePeg)`
