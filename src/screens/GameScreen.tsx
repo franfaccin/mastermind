@@ -10,6 +10,7 @@ import GameRules from "../components/GameRules";
 import Scoreboard from "../components/Scoreboard";
 import { Modal } from "../components/Modal";
 import { useScoreboard } from "../hooks/useScoreboard";
+import Footer from "../components/Footer";
 
 const GameArea = styled.div`
   display: flex;
@@ -66,6 +67,7 @@ const GameScreen = () => {
           <Scoreboard wins={wins} loses={loses} />
         </BottomSection>
       </GameArea>
+      <Footer />
       <Modal
         isOpen={isModalOpen}
         showCloseBtn={true}
